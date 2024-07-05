@@ -1,0 +1,77 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="site-section">
+        <div class="container">
+            <div class="row blog-entries">
+                <div class="col-md-12 col-lg-8 main-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="mb-4">Assalomu alaykum, men Otabek Xakimjonov</h2>
+                            <p>
+                                Bu websayt sinov tariqasida bilimlarni oshirish uchun preview.colorlib.com/theme/balita
+                                teplate dan foydalanilgan holatda yaratildi. Buni yaratishdan asosiy maqsad bilimlarni
+                                mustahkamlash va unversitetdan berilgan topshiriq yani individual loyiha 2 ni bajarish
+                            </p>
+                            <p>
+{#                                Arzimagan mehnatimizni munosib qadrlaysiz va kaminani yanada ruhlantirasiz degan umid#}
+{#                                Otabek#}
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="row mb-5 mt-5">
+                        <div class="col-md-12 mb-5">
+                            <h2>Bizning manzilgohlar</h2>
+                        </div>
+                        <div class="col-md-12">
+                            {% for post in latest_posts_for_about %}
+                                <div class="post-entry-horzontal">
+                                    <a href="/blog/{{ post.id }}">
+                                        <div class="image" style="background-image: url({{ post.image.url }});"></div>
+                                        <span class="text">
+<div class="post-meta">
+<span class="category">{{ post.category }}</span>
+<span class="mr-2">{{ post.created_at }}</span> &bullet;
+<span class="ml-2"><span class="fa fa-comments"></span>{{ post.comment_count }}</span>
+</div>
+<h2>{{ post.title }}</h2>
+</span>
+                                    </a>
+                                </div>
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <nav aria-label="Page navigation" class="text-center">
+                                <ul class="pagination">
+                                    {% if latest_posts_for_about.has_previous %}
+                                        <li class="page-item  active"><a class="page-link" href="?page={{ latest_posts_for_about.previous_page_number }}">Prev</a></li>
+                                    {% endif %}
+                                    {% for page in latest_posts_for_about.paginator.page_range %}
+                                        {% if latest_posts_for_about.number == page %}
+                                            <li class="page-item active"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                                        {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if latest_posts_for_about.has_next %}
+                                        <li class="page-item  active"><a class="page-link" href="?page={{ latest_posts_for_about.next_page_number }}">Next</a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                {% include 'layouts/sidebar.html' %}
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
