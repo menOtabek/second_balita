@@ -73,10 +73,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
+    #     }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'otabek_balita',
@@ -86,6 +86,19 @@ DATABASES = {
         'PORT': '25060'
     }
 }
+
+AWS_ACCESS_KEY_ID = 'DO00QFKKECEJ66ABV9GD'
+AWS_SECRET_ACCESS_KEY = 'DynSRfM4nLPmigZxiw07x2tw0nt9omPeSuhtGUUHrL8'
+AWS_STORAGE_BUCKET_NAME = 'otabekbalitacdn'
+AWS_S3_ENDPOINT_URL = 'https://portfolioscdn.blr1.digitaloceanspaces.com'
+AWS_S3_CUSTOM_DOMAIN = 'portfolioscdn.blr1.digitaloceanspaces.com/' + AWS_STORAGE_BUCKET_NAME
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+    'ACL': 'public-read'
+}
+# Media files configuration
+DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
